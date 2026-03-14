@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/cherry_leaves" }
+    ],
+    "snowy=true": [
+      { "model": "block/cherry_leaves_snowy" }
+    ]
+  }
+}

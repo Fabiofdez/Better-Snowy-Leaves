@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/acacia_leaves" }
+    ],
+    "snowy=true": [
+      { "model": "block/acacia_leaves_snowy" }
+    ]
+  }
+}

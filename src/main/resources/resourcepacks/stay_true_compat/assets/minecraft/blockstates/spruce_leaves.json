@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/spruce_leaves" },
+      { "model": "block/spruce_leaves1" }
+    ],
+    "snowy=true": [
+      { "model": "block/spruce_leaves_snowy" },
+      { "model": "block/spruce_leaves1_snowy" }
+    ]
+  }
+}

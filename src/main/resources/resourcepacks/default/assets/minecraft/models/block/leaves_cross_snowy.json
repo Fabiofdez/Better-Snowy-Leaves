@@ -1,0 +1,35 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"parent": "block/block",
+	"textures": {
+		"top_snow": "block/snowy_leaves_top",
+		"particle": "#all"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#all", "cullface": "north", "tintindex": 0},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#all", "cullface": "east", "tintindex": 0},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#all", "cullface": "south", "tintindex": 0},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#all", "cullface": "west", "tintindex": 0},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#all", "cullface": "up", "tintindex": 0},
+				"down": {"uv": [16, 16, 0, 0], "texture": "#all", "cullface": "down", "tintindex": 0}
+			}
+		},
+		{
+			"name": "overlay_cube",
+			"from": [0, 0, 0],
+			"to": [16, 16, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#sides_snow", "cullface": "north"},
+				"east": {"uv": [0, 0, 16, 16], "texture": "#sides_snow", "cullface": "east"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#sides_snow", "cullface": "south"},
+				"west": {"uv": [0, 0, 16, 16], "texture": "#sides_snow", "cullface": "west"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#top_snow"}
+			}
+		}
+	]
+}

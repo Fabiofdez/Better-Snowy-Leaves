@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/mangrove_leaves" },
+      { "model": "block/mangrove_leaves1" }
+    ],
+    "snowy=true": [
+      { "model": "block/mangrove_leaves_snowy" },
+      { "model": "block/mangrove_leaves1_snowy" }
+    ]
+  }
+}

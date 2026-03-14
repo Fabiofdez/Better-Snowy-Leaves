@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/pale_oak_leaves" },
+      { "model": "block/pale_oak_leaves1" },
+      { "model": "block/pale_oak_leaves2" }
+    ],
+    "snowy=true": [
+      { "model": "block/pale_oak_leaves_snowy" },
+      { "model": "block/pale_oak_leaves1_snowy" },
+      { "model": "block/pale_oak_leaves2_snowy" }
+    ]
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "block/leaves_cross_snowy",
+  "textures": {
+    "all": "block/jungle_leaves",
+    "sides_snow": "block/snowy_jungle_leaves"
+  }
+}

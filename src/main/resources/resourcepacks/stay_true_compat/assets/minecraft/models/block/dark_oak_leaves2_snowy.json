@@ -1,0 +1,9 @@
+{
+  "parent": "block/leaves_cross_snowy",
+  "textures": {
+    "all": "block/dark_oak_leaves2",
+    "bushy": "block/dark_oak_leaves_bushy2",
+    "sides_snow": "block/snowy_dark_oak_leaves2",
+    "bushy_snow": "block/snowy_dark_oak_leaves_bushy2"
+  }
+}

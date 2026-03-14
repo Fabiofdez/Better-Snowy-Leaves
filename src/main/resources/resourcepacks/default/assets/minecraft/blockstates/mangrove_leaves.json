@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "snowy=false": [
+      { "model": "block/mangrove_leaves" }
+    ],
+    "snowy=true": [
+      { "model": "block/mangrove_leaves_snowy" }
+    ]
+  }
+}
