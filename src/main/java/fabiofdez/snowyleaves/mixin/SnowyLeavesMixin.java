@@ -55,8 +55,8 @@ public class SnowyLeavesMixin extends Block {
 
   @Inject(method = "updateShape", at = @At("TAIL"), cancellable = true)
   protected void SnowyLeaves$updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction dir, BlockPos pos2, BlockState state2, RandomSource src, CallbackInfoReturnable<BlockState> cir) {
-    if (dir != Direction.UP) return;
-    cir.setReturnValue(cir.getReturnValue().setValue(SNOWY, state2.is(BlockTags.SNOW)));
+    BlockState blockAbove = level.getBlockState(pos.above());
+    cir.setReturnValue(cir.getReturnValue().setValue(SNOWY, blockAbove.is(BlockTags.SNOW)));
   }
 
   static {
