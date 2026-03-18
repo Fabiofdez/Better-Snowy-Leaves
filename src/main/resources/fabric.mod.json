@@ -3,13 +3,12 @@
 	"id": "better-snowy-leaves",
 	"version": "${version}",
 	"name": "Better Snowy Leaves",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Subtle improvement to snowy leaves, with Stay True compat!",
 	"authors": [
-		"Me!"
+		"Fabiofdez"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/Fabiofdez/Better-Snowy-Leaves"
 	},
 	"license": "CC0-1.0",
 	"icon": "assets/better-snowy-leaves/icon.png",
