@@ -71,17 +71,17 @@ fun Project.configureModPublishing(ctx: Context) {
 		}
 
 		val jarTask = tasks.named(ctx.extension.jarTask.get()).map { it as Jar }
-		val srcJarTask = tasks.named(ctx.extension.sourcesJarTask.get()).map { it as Jar }
+		// val srcJarTask = tasks.named(ctx.extension.sourcesJarTask.get()).map { it as Jar }
 
 		file.set(jarTask.flatMap(Jar::getArchiveFile))
-		additionalFiles.from(srcJarTask.flatMap(Jar::getArchiveFile))
+		// additionalFiles.from(srcJarTask.flatMap(Jar::getArchiveFile))
 		type = releaseType
-		version = ctx.fullVersion
+		version = "${ctx.baseVersion}+${ctx.currentMcVersion}"
 		changelog.set(rootProject.file("CHANGELOG.md").readText())
 		modLoaders.add(ctx.loader.id)
 
 		displayName =
-			"${ctx.modName} ${ctx.basicVersion} ${ctx.loader.id.replaceFirstChar(Char::titlecase)} ${ctx.currentMcVersion}"
+      "${ctx.modName} ${ctx.basicVersion} - ${ctx.loader.id.replaceFirstChar(Char::titlecase)} ${ctx.currentMcVersion}"
 
 		val deps = ctx.extension.dependencies
 
@@ -115,6 +115,9 @@ private fun ModPublishExtension.curseforge(
 
 	this.accessToken = accessToken
 	minecraftVersions.addAll(listOf(ctx.currentMcVersion) + additionalVersions)
+  changelogType = "markdown"
+  clientRequired = true
+  serverRequired = true
 
 	deps.required.forEach { dep -> whenNotNull(dep.curseforge) { requires(it) } }
 	deps.optional.forEach { dep -> whenNotNull(dep.curseforge) { optional(it) } }

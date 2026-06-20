@@ -2,39 +2,40 @@ package fabiofdez.snowyleaves.platform.fabric;
 
 //? fabric {
 
-import fabiofdez.snowyleaves.BetterSnowyLeaves;
 import dev.kikugie.fletching_table.annotation.fabric.Entrypoint;
+import fabiofdez.snowyleaves.BetterSnowyLeaves;
+import fabiofdez.snowyleaves.resource.BuiltInResourcePack;
+import fabiofdez.snowyleaves.resource.ResourcePacks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.fabricmc.loader.api.ModContainer;
-import net.minecraft.network.chat.Component;
 
 @Entrypoint("client")
 public class FabricClientEntrypoint implements ClientModInitializer {
 
-	@Override
-	public void onInitializeClient() {
-		BetterSnowyLeaves.onInitializeClient();
+  @Override
+  public void onInitializeClient() {
+    BetterSnowyLeaves.onInitializeClient();
 
-    ModContainer container = FabricLoader
-        .getInstance()
-        .getModContainer(BetterSnowyLeaves.MOD_ID)
-        .orElseThrow();
+    FabricLoader.getInstance().getModContainer(BetterSnowyLeaves.MOD_ID).ifPresent((container) -> {
+      addPack(container, ResourcePacks.DEFAULT);
+      addPack(container, ResourcePacks.STAY_TRUE_COMPAT);
+    });
+  }
 
+  private static void addPack(ModContainer container, BuiltInResourcePack pack) {
     ResourceManagerHelper.registerBuiltinResourcePack(
-        BetterSnowyLeaves.id("default"),
+        BetterSnowyLeaves.id(pack.id()),
         container,
-        Component.literal("Default Snowy leaves"),
-        ResourcePackActivationType.DEFAULT_ENABLED
+        pack.name(),
+        activationFor(pack)
     );
-    ResourceManagerHelper.registerBuiltinResourcePack(
-        BetterSnowyLeaves.id("stay_true_compat"),
-        container,
-        Component.literal("Snowy leaves X Stay True"),
-        ResourcePackActivationType.NORMAL
-    );
-	}
+  }
+
+  private static ResourcePackActivationType activationFor(BuiltInResourcePack pack) {
+    return pack.defaultEnabled() ? ResourcePackActivationType.DEFAULT_ENABLED : ResourcePackActivationType.NORMAL;
+  }
 }
 //?}

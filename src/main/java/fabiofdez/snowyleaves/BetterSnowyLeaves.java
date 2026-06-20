@@ -18,7 +18,7 @@ import fabiofdez.snowyleaves.platform.fabric.FabricPlatform;
 public class BetterSnowyLeaves {
 
 	public static final String MOD_ID = /*$ mod_id*/ "snowyleaves";
-	public static final String MOD_VERSION = /*$ mod_version*/ "1.1.0";
+	public static final String MOD_VERSION = /*$ mod_version*/ "1.2.0";
 	public static final String MOD_FRIENDLY_NAME = /*$ mod_name*/ "Better Snowy Leaves";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
@@ -49,17 +49,17 @@ public class BetterSnowyLeaves {
 	}
 
 	public static ResourceLocation id(String path) {
-		//? > 1.19.2 {
+		//? >= 1.21 {
 		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
-		 //?} <= 1.19.2 {
+		 //?} < 1.21 {
 		/*return new ResourceLocation(MOD_ID, path);
 		*///?}
 	}
 
 	public static ResourceLocation id(String namespace, String path) {
-		//? > 1.19.2 {
+		//? >= 1.21 {
 		return ResourceLocation.fromNamespaceAndPath(namespace, path);
-		 //?} <= 1.19.2 {
+		 //?} < 1.21 {
 		/*return new ResourceLocation(namespace, path);
 		*///?}
 	}

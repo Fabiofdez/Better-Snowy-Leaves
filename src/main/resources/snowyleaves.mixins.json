@@ -9,5 +9,6 @@
   "mixins": [
 		"SnowyLeavesMixin"
   ],
-  "client": []
+  "client": [],
+  "refmap": "snowyleaves.mixins.refmap.json"
 }
