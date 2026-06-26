@@ -43,6 +43,7 @@ public class SnowyLeavesMixin extends Block {
 
   @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
   protected void SnowyLeaves$createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
+    if (this.getClass().toString().contains("alpinewhispers")) return; // TODO: more robust compat patch?
     builder.add(SNOWY);
   }
 
