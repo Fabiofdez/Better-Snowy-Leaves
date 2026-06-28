@@ -1,5 +1,6 @@
 package fabiofdez.snowyleaves.mixin;
 
+import fabiofdez.snowyleaves.compat.ModCompat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
@@ -36,21 +37,26 @@ public class SnowyLeavesMixin extends Block {
     super(properties);
   }
 
-  @Inject(method = "<init>", at = @At("RETURN"))
+  @Inject(method = "<init>", at = @At("TAIL"))
   protected void SnowyLeaves$init(/*? if >= 1.21.5 >> 'BlockBehaviour' */float f, BlockBehaviour.Properties properties, CallbackInfo ci) {
+    if (!this.isSnowyLeaves()) return;
+
     this.registerDefaultState(this.defaultBlockState().setValue(SNOWY, false));
   }
 
   @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
   protected void SnowyLeaves$createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
-    if (this.getClass().toString().contains("alpinewhispers")) return; // TODO: more robust compat patch?
+    if (ModCompat.hasConflict(this.getClass())) return;
+
     builder.add(SNOWY);
   }
 
   @Inject(method = "getStateForPlacement", at = @At("TAIL"), cancellable = true)
   protected void SnowyLeaves$getStateForPlacement(BlockPlaceContext ctx, CallbackInfoReturnable<BlockState> cir) {
+    if (ctx.getLevel().isClientSide()) return;
+
     BlockState state = cir.getReturnValue();
-    if (state == null) return;
+    if (state == null || !isSnowyLeaves(state)) return;
 
     Level level = ctx.getLevel();
     BlockPos pos = ctx.getClickedPos();
@@ -64,8 +70,21 @@ public class SnowyLeavesMixin extends Block {
   //protected void SnowyLeaves$updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos, CallbackInfoReturnable<BlockState> cir) {
       //? > 1.21.1
   protected void SnowyLeaves$updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos currentPos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource src, CallbackInfoReturnable<BlockState> cir) {
+    if (!isSnowyLeaves(state)) return;
+
     BlockState blockAbove = level.getBlockState(currentPos.above());
     cir.setReturnValue(cir.getReturnValue().setValue(SNOWY, blockAbove.is(BlockTags.SNOW)));
+  }
+
+  @Unique
+  @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+  private boolean isSnowyLeaves() {
+    return isSnowyLeaves(this.defaultBlockState());
+  }
+
+  @Unique
+  private static boolean isSnowyLeaves(BlockState state) {
+    return state.hasProperty(SNOWY);
   }
 
   static {
