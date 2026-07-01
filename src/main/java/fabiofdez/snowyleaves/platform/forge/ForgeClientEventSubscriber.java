@@ -41,6 +41,7 @@ public class ForgeClientEventSubscriber {
 
     addPack(modFile, event, ResourcePacks.DEFAULT);
     addPack(modFile, event, ResourcePacks.STAY_TRUE_COMPAT);
+    if (BetterSnowyLeaves.xplat().isModLoaded("polytone")) addPack(modFile, event, ResourcePacks.RAINBOW_FOLIAGE_COMPAT);
   }
 
   private static void addPack(IModFile modFile, final AddPackFindersEvent event, BuiltInResourcePack pack) {

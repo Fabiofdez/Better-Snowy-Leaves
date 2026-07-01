@@ -1,0 +1,8 @@
+{
+  "parent": "block/snowy_template_leaves_no_tint",
+  "textures": {
+    "all": "minecraft:block/azalea_leaves",
+    "bushy": "minecraft:block/azalea_leaves_bushy",
+    "snowy": "minecraft:block/snowy_azalea_leaves_bushy"
+  }
+}

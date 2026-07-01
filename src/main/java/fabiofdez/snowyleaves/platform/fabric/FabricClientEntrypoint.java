@@ -22,6 +22,7 @@ public class FabricClientEntrypoint implements ClientModInitializer {
     FabricLoader.getInstance().getModContainer(BetterSnowyLeaves.MOD_ID).ifPresent((container) -> {
       addPack(container, ResourcePacks.DEFAULT);
       addPack(container, ResourcePacks.STAY_TRUE_COMPAT);
+      if (BetterSnowyLeaves.xplat().isModLoaded("polytone")) addPack(container, ResourcePacks.RAINBOW_FOLIAGE_COMPAT);
     });
   }
 

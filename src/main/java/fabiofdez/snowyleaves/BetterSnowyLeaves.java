@@ -34,7 +34,7 @@ public class BetterSnowyLeaves {
 		LOGGER.debug("{}: { version: {}; friendly_name: {} }", MOD_ID, MOD_VERSION, MOD_FRIENDLY_NAME);
 	}
 
-	static Platform xplat() {
+	public static Platform xplat() {
 		return PLATFORM;
 	}
 

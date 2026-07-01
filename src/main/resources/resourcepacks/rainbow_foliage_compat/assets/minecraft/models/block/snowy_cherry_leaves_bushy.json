@@ -1,0 +1,8 @@
+{
+  "parent": "block/snowy_template_leaves_no_tint",
+  "textures": {
+    "all": "minecraft:block/cherry_leaves",
+    "bushy": "minecraft:block/cherry_leaves_bushy",
+    "snowy": "minecraft:block/snowy_cherry_leaves_bushy"
+  }
+}

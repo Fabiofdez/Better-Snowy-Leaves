@@ -29,6 +29,7 @@ public class NeoforgeClientEventSubscriber {
 	public static void addFeaturePacks(final AddPackFindersEvent event) {
     addPack(event, ResourcePacks.DEFAULT);
     addPack(event, ResourcePacks.STAY_TRUE_COMPAT);
+    if (BetterSnowyLeaves.xplat().isModLoaded("polytone")) addPack(event, ResourcePacks.RAINBOW_FOLIAGE_COMPAT);
   }
 
   private static void addPack(final AddPackFindersEvent event, BuiltInResourcePack pack) {
