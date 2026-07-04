@@ -3,6 +3,8 @@ package fabiofdez.snowyleaves.platform;
 public interface Platform {
 	boolean isModLoaded(String modId);
 
+  boolean isModLoading(String modId);
+
 	ModLoader loader();
 
 	String mcVersion();

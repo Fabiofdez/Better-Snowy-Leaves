@@ -48,6 +48,9 @@ stonecutter parameters {
 			replace("public boolean canSurvive", "protected boolean canSurvive")
 			replace("public List<ItemStack> getDrops", "protected List<ItemStack> getDrops")
 			replace("public InteractionResult use(", "protected ItemInteractionResult useItemOn(")
+
+			replace("com.ferreusveritas.dynamictrees", "com.dtteam.dynamictrees")
+			replace("Lcom/ferreusveritas/dynamictrees", "Lcom/dtteam/dynamictrees")
 		}
 
 		string(current.parsed eq "1.21.1", "has_interaction_result") {

@@ -21,6 +21,7 @@ platform {
 		required("fabricloader") {
 			fabricLikeVersionRange = ">=${prop("deps.fabric-loader")}"
 		}
+		optional("dynamictrees") {}
 		// optional("modmenu") {}
 	}
 }
@@ -55,6 +56,8 @@ repositories {
 	mavenCentral()
 	strictMaven("https://maven.terraformersmc.com/", "com.terraformersmc") { name = "TerraformersMC" }
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+
+	maven("https://harleyoconnor.com/maven")
 }
 
 configurations.all {
@@ -74,5 +77,12 @@ dependencies {
 	// implementation(libs.moulberry.mixinconstraints)
 	// include(libs.moulberry.mixinconstraints)
 	modImplementation("net.fabricmc.fabric-api:fabric-api:${prop("deps.fabric-api")}")
+
+	if (hasProperty("deps.dynamictrees")) {
+		modCompileOnly("com.dtteam.dynamictrees:dynamictrees-fabric-${prop("deps.minecraft")}:${prop("deps.dynamictrees")}") {
+			isTransitive = false
+		}
+	}
+
 //	modLocalRuntime("com.terraformersmc:modmenu:${prop("deps.modmenu")}")
 }

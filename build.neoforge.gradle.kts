@@ -56,11 +56,17 @@ neoForge {
 repositories {
 	mavenCentral()
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+
+	maven("https://harleyoconnor.com/maven")
 }
 
 dependencies {
 	// implementation(libs.moulberry.mixinconstraints)
 	// jarJar(libs.moulberry.mixinconstraints)
+
+	if (hasProperty("deps.dynamictrees")) {
+		compileOnly("com.dtteam.dynamictrees:dynamictrees-neoforge-${prop("deps.minecraft")}:${prop("deps.dynamictrees")}")
+	}
 }
 
 tasks.named("createMinecraftArtifacts") {

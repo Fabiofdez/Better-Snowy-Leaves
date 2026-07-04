@@ -1,13 +1,14 @@
 {
-	"package": "fabiofdez.snowyleaves.mixin",
+  "package": "fabiofdez.snowyleaves.mixin",
   "required": true,
   "minVersion": "0.8",
   "compatibilityLevel": "${java}",
   "injectors": {
     "defaultRequire": 1
   },
+  "plugin": "fabiofdez.snowyleaves.plugin.SnowyLeavesMixinPlugin",
   "mixins": [
-		"SnowyLeavesMixin"
+    "SnowyLeavesMixin"
   ],
   "client": [],
   "refmap": "snowyleaves.mixins.refmap.json"

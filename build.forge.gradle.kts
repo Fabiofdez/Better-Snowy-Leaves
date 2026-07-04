@@ -17,6 +17,9 @@ platform {
 		required("forge") {
 			forgeLikeVersionRange.set("[1,)")
 		}
+		optional("dynamictrees") {
+			forgeLikeVersionRange.set("[1,)")
+		}
 	}
 }
 
@@ -57,6 +60,8 @@ mixin {
 repositories {
 	mavenCentral()
 	strictMaven("https://api.modrinth.com/maven", "maven.modrinth") { name = "Modrinth" }
+
+	maven("https://harleyoconnor.com/maven")
 }
 
 dependencies {
@@ -64,6 +69,10 @@ dependencies {
 
 	// implementation(libs.moulberry.mixinconstraints)
 	// jarJar(libs.moulberry.mixinconstraints)
+
+	if (hasProperty("deps.dynamictrees")) {
+		modCompileOnly("com.ferreusveritas.dynamictrees:DynamicTrees-${prop("deps.minecraft")}:${prop("deps.dynamictrees")}")
+	}
 }
 
 sourceSets {
