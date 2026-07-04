@@ -1,2 +1,5 @@
 ### Additions
-- Add compat with Dynamic Trees
+- Now compatible with Dynamic Trees mod
+
+### Changes
+- Updated resource pack names
