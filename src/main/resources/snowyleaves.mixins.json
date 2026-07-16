@@ -10,6 +10,8 @@
   "mixins": [
     "SnowyLeavesMixin"
   ],
-  "client": [],
+  "client": [
+    "LeavesBlockStateMixin"
+  ],
   "refmap": "snowyleaves.mixins.refmap.json"
 }

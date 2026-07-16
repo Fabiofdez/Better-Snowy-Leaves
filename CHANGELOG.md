@@ -1,5 +1,7 @@
 ### Additions
-- Now compatible with Dynamic Trees mod
+- Ported to 26.1.2 (Fabric)
+- Ported to 26.1.2 (NeoForge)
 
 ### Changes
-- Updated resource pack names
+- Dynamically add snowy blockstates resources
+- Minimize bundled assets included for compatibility

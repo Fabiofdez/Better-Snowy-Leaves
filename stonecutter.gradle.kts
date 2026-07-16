@@ -95,6 +95,9 @@ stonecutter parameters {
 			replace("entityCutoutNoCull", "entityCutout")
 			replace("level.getDayTime()", "level.getDefaultClockTime()")
 			replace("PayloadTypeRegistry.playC2S", "PayloadTypeRegistry.serverboundPlay")
+
+			// bytecode refs
+			replace("method_65720", "lambda\$loadBlockStates\$2")
 		}
 
 		string(loader == "neoforge") {

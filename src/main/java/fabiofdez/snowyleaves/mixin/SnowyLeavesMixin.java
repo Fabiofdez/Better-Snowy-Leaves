@@ -33,7 +33,7 @@ public class SnowyLeavesMixin extends Block {
   }
 
   @Inject(method = "<init>", at = @At("TAIL"))
-  protected void SnowyLeaves$init(/*? if >= 1.21.5 >> 'BlockBehaviour' */float f, BlockBehaviour.Properties properties, CallbackInfo ci) {
+  protected void snowyleaves$init(/*? if >= 1.21.5 >> 'BlockBehaviour' */float f, BlockBehaviour.Properties properties, CallbackInfo ci) {
     BlockState initialState = this.defaultBlockState();
     if (!SnowyLeavesBehavior.isSnowyLeaves(initialState)) return;
 
@@ -41,14 +41,14 @@ public class SnowyLeavesMixin extends Block {
   }
 
   @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
-  protected void SnowyLeaves$createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
+  protected void snowyleaves$createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
     if (ModCompat.hasConflict(this.getClass())) return;
 
     builder.add(SnowyLeavesBehavior.SNOWY);
   }
 
   @Inject(method = "getStateForPlacement", at = @At("TAIL"), cancellable = true)
-  protected void SnowyLeaves$getStateForPlacement(BlockPlaceContext ctx, CallbackInfoReturnable<BlockState> cir) {
+  protected void snowyleaves$getStateForPlacement(BlockPlaceContext ctx, CallbackInfoReturnable<BlockState> cir) {
     Level level = ctx.getLevel();
     if (level.isClientSide()) return;
 
@@ -59,9 +59,9 @@ public class SnowyLeavesMixin extends Block {
 
   @Inject(method = "updateShape", at = @At("TAIL"), cancellable = true)
       //? <= 1.21.1
-  //protected void SnowyLeaves$updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos, CallbackInfoReturnable<BlockState> cir) {
+  //protected void snowyleaves$updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos, CallbackInfoReturnable<BlockState> cir) {
     //? > 1.21.1
-    protected void SnowyLeaves$updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource src, CallbackInfoReturnable<BlockState> cir) {
+    protected void snowyleaves$updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource src, CallbackInfoReturnable<BlockState> cir) {
     cir.setReturnValue(SnowyLeavesBehavior.update(state, level, pos));
   }
 }
