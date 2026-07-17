@@ -2,12 +2,15 @@ package fabiofdez.snowyleaves.mixin;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
+import fabiofdez.snowyleaves.BetterSnowyLeaves;
 import net.minecraft.client.Minecraft;
 import fabiofdez.snowyleaves.resource.ResourcePacks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
+import net.minecraft.server.packs.resources.ResourceManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -52,7 +55,7 @@ public class LeavesBlockStateMixin {
     ResourceLocation id = BuiltInRegistries.BLOCK.getKey(targetBlock);
     if (!id.getPath().contains("leaves")) return;
 
-    modifyBlockStates(original);
+    modifyBlockStates(id, original);
   }
   *///?} else {
   @Inject(method = "loadBlockStates", at = @At("HEAD"))
@@ -63,7 +66,7 @@ public class LeavesBlockStateMixin {
   @Inject(method = "method_65720", at = @At(value = "INVOKE", target = "Lcom/mojang/serialization/Codec;parse(Lcom/mojang/serialization/DynamicOps;Ljava/lang/Object;)Lcom/mojang/serialization/DataResult;"))
   private static void snowyleaves$modifyJson(CallbackInfoReturnable cir, @Local ResourceLocation id, @Local JsonElement original) {
     if (!snowyLeavesEnabled || !id.getPath().contains("leaves")) return;
-    modifyBlockStates(original);
+    modifyBlockStates(id, original);
   }
   //?}
 
@@ -79,7 +82,7 @@ public class LeavesBlockStateMixin {
   }
 
   @Unique
-  private static void modifyBlockStates(JsonElement original) {
+  private static void modifyBlockStates(ResourceLocation id, JsonElement original) {
     JsonObject blockstates = original.getAsJsonObject();
     JsonObject variants = blockstates.getAsJsonObject("variants");
     if (variants == null) return;
@@ -89,20 +92,23 @@ public class LeavesBlockStateMixin {
     if (defaultState == null) return;
 
     JsonObject newVariants = new JsonObject();
-    newVariants.add("snowy=false", defaultState.deepCopy());
+    newVariants.add("snowy=false", defaultState);
 
     JsonElement snowyState;
     if (defaultState.isJsonArray()) {
-      List<JsonObject> snowyStates = defaultState
+      List<JsonElement> newStateList = defaultState
+          .deepCopy()
           .getAsJsonArray()
           .asList()
           .stream()
-          .map(LeavesBlockStateMixin::getSnowyVariant)
+          .map((elt) -> getSnowyVariant(id, elt))
           .toList();
 
-      snowyState = gson.toJsonTree(snowyStates);
+      if (newStateList.stream().anyMatch(JsonNull.INSTANCE::equals)) return;
+      snowyState = gson.toJsonTree(newStateList);
     } else {
-      snowyState = getSnowyVariant(defaultState);
+      snowyState = getSnowyVariant(id, defaultState.deepCopy());
+      if (JsonNull.INSTANCE.equals(snowyState)) return;
     }
 
     newVariants.add("snowy=true", snowyState);
@@ -110,17 +116,35 @@ public class LeavesBlockStateMixin {
   }
 
   @Unique
-  private static JsonObject getSnowyVariant(JsonElement elt) {
+  private static JsonElement getSnowyVariant(ResourceLocation id, JsonElement elt) {
     JsonObject variant = elt.getAsJsonObject();
     String model = variant.get("model").getAsString();
 
     List<String> modelPathParts = Arrays.asList(model.split("/"));
     int lastIdx = modelPathParts.size() - 1;
-    String modelName = modelPathParts.get(lastIdx);
-    modelPathParts.set(lastIdx, "%s_snowy".formatted(modelName));
 
-    variant.addProperty("model", String.join("/", modelPathParts));
+    String modelFile = "%s_snowy".formatted(modelPathParts.get(lastIdx));
+    modelPathParts.set(lastIdx, modelFile);
+    model = String.join("/", modelPathParts);
 
+    if (!snowyModelExists(model)) {
+      BetterSnowyLeaves.LOGGER.warn("Missing snowy model {} for block: {}", model, id);
+      return JsonNull.INSTANCE;
+    }
+
+    variant.addProperty("model", model);
     return variant;
+  }
+
+  @Unique
+  private static boolean snowyModelExists(String model) {
+    //? < 1.21
+    //ResourceLocation modelId = ResourceLocation.tryParse(model);
+    //? >= 1.21
+    ResourceLocation modelId = ResourceLocation.parse(model);
+    String modelPath = "models/%s.json".formatted(modelId.getPath());
+
+    ResourceManager manager = Minecraft.getInstance().getResourceManager();
+    return manager.getResource(modelId.withPath(modelPath)).isPresent();
   }
 }

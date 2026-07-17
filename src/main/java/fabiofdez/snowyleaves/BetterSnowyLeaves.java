@@ -19,7 +19,7 @@ import org.slf4j.event.Level;
 public class BetterSnowyLeaves {
 
 	public static final String MOD_ID = /*$ mod_id*/ "snowyleaves";
-	public static final String MOD_VERSION = /*$ mod_version*/ "1.4.0";
+	public static final String MOD_VERSION = /*$ mod_version*/ "1.4.1";
 	public static final String MOD_FRIENDLY_NAME = /*$ mod_name*/ "Better Snowy Leaves";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 

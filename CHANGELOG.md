@@ -1,7 +1,3 @@
-### Additions
-- Ported to 26.1.2 (Fabric)
-- Ported to 26.1.2 (NeoForge)
-
-### Changes
-- Dynamically add snowy blockstates resources
-- Minimize bundled assets included for compatibility
+### Fixed
+- Fix broken models for unsupported leaves
+- Fix bug with other mods that add their own snowy leaves
