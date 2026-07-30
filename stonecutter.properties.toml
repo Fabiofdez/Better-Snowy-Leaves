@@ -47,6 +47,11 @@ deps.minecraft = "26.1.2"
 deps.fabric-api = "0.145.1+26.1"
 deps.fabric-loader = "0.19.2"
 
+[fabric."26.2"]
+deps.minecraft = "26.2"
+deps.fabric-api = "0.156.0+26.2"
+deps.fabric-loader = "0.19.3"
+
 [forge]
 
 [forge."1.20.1"]
@@ -76,3 +81,7 @@ deps.parchment = "1.21.11:2025.12.20"
 deps.minecraft = "26.1.2"
 deps.neoforge = "26.1.2.76"
 deps.dynamictrees = "1.8.0-BETA04"
+
+[neoforge."26.2"]
+deps.minecraft = "26.2"
+deps.neoforge = "26.2.0.40-beta"

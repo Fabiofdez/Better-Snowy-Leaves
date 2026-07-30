@@ -1,3 +1,3 @@
-### Fixed
-- Fix broken models for unsupported leaves
-- Fix bug with other mods that add their own snowy leaves
+### Additions
+- Ported to 26.2 (Fabric)
+- Ported to 26.2 (NeoForge)

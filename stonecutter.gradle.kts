@@ -79,6 +79,7 @@ stonecutter parameters {
 			replace("renderer.RenderType", "renderer.rendertype.RenderType")
 			replace("ARGB.lerp", "ARGB.srgbLerp")
 			replace("ResourceLocation", "Identifier")
+			replace("LoadingModList.get()", "FMLLoader.getCurrent().getLoadingModList()")
 		}
 
 		string(current.parsed >= "26.1") {

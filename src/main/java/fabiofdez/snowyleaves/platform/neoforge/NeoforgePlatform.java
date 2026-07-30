@@ -5,6 +5,7 @@ package fabiofdez.snowyleaves.platform.neoforge;
 /*import fabiofdez.snowyleaves.platform.Platform;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.loading.FMLLoader;
+//? < 1.21.11
 import net.neoforged.fml.loading.LoadingModList;
 import net.neoforged.fml.loading.VersionInfo;
 
