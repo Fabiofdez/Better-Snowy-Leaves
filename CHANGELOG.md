@@ -1,3 +1,2 @@
-### Additions
-- Ported to 26.2 (Fabric)
-- Ported to 26.2 (NeoForge)
+### Fixes
+- Resolve conflicts for any modded leaves that already have the `SNOWY` block property

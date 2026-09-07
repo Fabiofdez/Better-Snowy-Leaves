@@ -1,11 +1,14 @@
 package fabiofdez.snowyleaves.mixin;
 
+import com.llamalad7.mixinextras.sugar.Local;
 import fabiofdez.snowyleaves.block.SnowyLeavesBehavior;
-import fabiofdez.snowyleaves.compat.ModCompat;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+//? <= 1.21.1
+//import net.minecraft.world.level.LevelAccessor;
+//? > 1.21.1
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LeavesBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -16,14 +19,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-//? if > 1.21.1 {
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ScheduledTickAccess;
-//? } else {
-/*import net.minecraft.world.level.LevelAccessor;
-    *///? }
 
 @Mixin(LeavesBlock.class)
 public class SnowyLeavesMixin extends Block {
@@ -42,8 +37,6 @@ public class SnowyLeavesMixin extends Block {
 
   @Inject(method = "createBlockStateDefinition", at = @At("TAIL"))
   protected void snowyleaves$createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder, CallbackInfo ci) {
-    if (ModCompat.hasConflict(this.getClass())) return;
-
     builder.add(SnowyLeavesBehavior.SNOWY);
   }
 
@@ -58,10 +51,7 @@ public class SnowyLeavesMixin extends Block {
   }
 
   @Inject(method = "updateShape", at = @At("TAIL"), cancellable = true)
-      //? <= 1.21.1
-  //protected void snowyleaves$updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos pos, BlockPos facingPos, CallbackInfoReturnable<BlockState> cir) {
-    //? > 1.21.1
-    protected void snowyleaves$updateShape(BlockState state, LevelReader level, ScheduledTickAccess tickAccess, BlockPos pos, Direction facing, BlockPos facingPos, BlockState facingState, RandomSource src, CallbackInfoReturnable<BlockState> cir) {
+  protected void snowyleaves$updateShape(CallbackInfoReturnable<BlockState> cir, @Local(argsOnly = true, ordinal = 0) BlockState state, @Local(argsOnly = true) /*? if <= 1.21.1 { *//*LevelAccessor*//*? } else { */LevelReader/*? } */ level, @Local(argsOnly = true, ordinal = 0) BlockPos pos) {
     cir.setReturnValue(SnowyLeavesBehavior.update(state, level, pos));
   }
 }

@@ -8,7 +8,8 @@
   },
   "plugin": "fabiofdez.snowyleaves.plugin.SnowyLeavesMixinPlugin",
   "mixins": [
-    "SnowyLeavesMixin"
+    "SnowyLeavesMixin",
+    "StateDefinitionBuilderMixin"
   ],
   "client": [
     "LeavesBlockStateMixin"
